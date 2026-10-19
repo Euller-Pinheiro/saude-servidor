@@ -1,0 +1,19 @@
+name: Testes
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  testes:
+    name: Servidor real do CI + cenários simulados
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ShellCheck
+        run: shellcheck -S warning saude-servidor.sh tests/test.sh
+      - name: Testes
+        run: sudo ./tests/test.sh
+      - name: Exemplo de saída (servidor do GitHub Actions)
+        run: sudo bash saude-servidor.sh
